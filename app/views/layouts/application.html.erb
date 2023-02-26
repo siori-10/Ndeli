@@ -2,15 +2,36 @@
 <html>
   <head>
     <title>Ndeli</title>
-    <meta name="viewport" content="width=device-width,initial-scale=1">
+
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
-    <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= stylesheet_pack_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
 
   <body>
+    <header>
+       <nav class="navbar navbar-expand-lg navbar-white border-bottom">
+        <div class="container">
+          <a class="navbar-brand">Ndeli</a>
+          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown"
+                        aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarNavDropdown">
+            <ul class="navbar-nav ml-auto">
+                <% if request.referer&.include?('/admin')%>
+                <%= render '/layouts/admin_header' %>
+                <% else %>
+                <%= render '/layouts/customer_header' %>
+                <% end %>
+          </div>
+        </div>
+      </nav>
+
+  </header>
     <%= yield %>
   </body>
 </html>
