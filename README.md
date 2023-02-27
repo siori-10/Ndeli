@@ -1,24 +1,31 @@
-# README
+# "Ndeli"
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+## サイト概要
+### サイトテーマ
+レシピ掲載コミュニティサイト
 
-Things you may want to cover:
+### テーマを選んだ理由
+病気などで食事制限が必要で日々の食事などに困っている方や、ダイエット、体質改善をしたい方に向けて自信の体に合わせたレシピを共有できるサービスを考えました。
+便利に自身に合わせたレシピを選択できることにより日々の食生活の向上につながると考えます。
 
-* Ruby version
+### ターゲットユーザ
+- 病気などで食事制限が必要な方
+- 体質改善が必要な方
+- 自身のレシピを共有したい方
 
-* System dependencies
+### 主な利用シーン
+- 料理をするとき
+- 自身のレシピを掲載する時
 
-* Configuration
+## 設計書
+<...>
 
-* Database creation
+## 開発環境
+- OS：Linux(CentOS)
+- 言語：HTML,CSS,JavaScript,Ruby,SQL
+- フレームワーク：Ruby on Rails
+- JSライブラリ：jQuery
+- IDE：Cloud9
 
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+## 使用素材
+- 使用検討中
