@@ -1,2 +1,27 @@
-<h1>Admin::Categories#index</h1>
-<p>Find me in app/views/admin/categories/index.html.erb</p>
+カテゴリー一覧
+
+<%= form_with model: @category,url: admin_categories_path, method: :post do |f| %>
+<p>カテゴリー名</p>
+<%= t.text_field :categoriy_name %>
+<%= t.submit '投稿',class:"btn btn-outline-primary" %>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th>
+        カテゴリー
+      </th>
+    </tr>
+  </thead>
+</table>
+<tbody>
+  <% @categories.each do |category| %>
+  <tr>
+    <td>
+      <%= categoriy_name %>
+    </td>
+    <td><%= link_to "編集する",edit_admin_category_path(category.id), class:"btn btn-outline-primary" %></td>
+    
+  </tr>
+  <% end %>
+</tbody>

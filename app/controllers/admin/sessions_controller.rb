@@ -2,11 +2,7 @@
 
 class Admin::SessionsController < Devise::SessionsController
   
-  def new_guest
-    customer = Customer.guest
-    sign_in customer
-    redirect_to root_path, notice: 'ゲストユーザーとしてログインしました。'
-  end 
+ 
   # before_action :configure_sign_in_params, only: [:create]
 
   # GET /resource/sign_in

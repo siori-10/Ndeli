@@ -1,0 +1,6 @@
+<% if admin_signed_in? %>
+<!--管理者側のヘッダー-->
+<li>
+  <%= link_to "ログアウト", destroy_admin_session_path, method: :delete %>
+</li>
+<% end %>

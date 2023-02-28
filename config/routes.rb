@@ -3,14 +3,16 @@ Rails.application.routes.draw do
   sessions: "admin/sessions"
 }
 
- devise_for :customers,skip: [:passwords], controllers: {
+devise_scope :customer do
+  post 'customers/guest_saign_in', to: 'public/sessions#new_guest'
+end
+
+devise_for :customers,skip: [:passwords], controllers: {
   registrations: "public/registrations",
   sessions: 'public/sessions'
 }
-devise_for :customers
-devise_scope :customers do
-  post 'customers/guest_saign_in', to: 'customers/sessions#new_guest'
-end
+#devise_for :customers
+
 
 
   scope module: :public do
@@ -25,13 +27,13 @@ end
   end
   scope module: :public do
     resources :recipes, only: [:new, :index, :edit, :show ]
-   
+
   end
   scope module: :public do
     get root to:"homes#top"
     get "home/about" => "homes#about",as:"about"
   end
-  
+
   namespace :admin do
     resources :comments, only: [:index, :destroy]
   end
@@ -47,6 +49,6 @@ end
   namespace :admin do
     root to:"homes#top"
   end
-  
+
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 end

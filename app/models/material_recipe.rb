@@ -1,0 +1,2 @@
+class MaterialRecipe < ApplicationRecord
+end
