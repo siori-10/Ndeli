@@ -1,2 +1,8 @@
-<h1>Admin::Categories#edit</h1>
-<p>Find me in app/views/admin/categories/edit.html.erb</p>
+<p><strong>カテゴリー編集</strong></p>
+
+<%= form_with model: @categoriy,url: admin_category_path(@categoriy.id), method: :patch do |f| %>
+
+<p>カテゴリー名</p>
+<%= f.text_field :categoriy_name %>
+<%= f.submit '変更', class:"btn btn-outline-primary" %>
+<% end %>

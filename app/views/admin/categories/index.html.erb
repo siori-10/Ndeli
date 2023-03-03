@@ -1,10 +1,14 @@
-カテゴリー一覧
+<div class="container mt-5">
+<p><strong>カテゴリー</strong>一覧</p>
 
-<%= form_with model: @category,url: admin_categories_path, method: :post do |f| %>
+<%= form_with model: @categoriy,url: admin_categories_path, method: :post do |f| %>
 <p>カテゴリー名</p>
-<%= t.text_field :categoriy_name %>
-<%= t.submit '投稿',class:"btn btn-outline-primary" %>
+<%= f.text_field :categoriy_name %>
+<%= f.submit '投稿', class:"btn btn-outline-primary" %>
+<% end %>
 
+<div class="row mt-4">
+  <div class="col-6">
 <table class="table">
   <thead>
     <tr>
@@ -13,15 +17,24 @@
       </th>
     </tr>
   </thead>
-</table>
+
 <tbody>
-  <% @categories.each do |category| %>
+  <% @categories.each do |categoriy| %>
   <tr>
     <td>
-      <%= categoriy_name %>
+      <%= categoriy.categoriy_name %>
     </td>
-    <td><%= link_to "編集する",edit_admin_category_path(category.id), class:"btn btn-outline-primary" %></td>
-    
+    <td>
+      <%= link_to "編集",edit_admin_category_path(categoriy.id), class:"btn btn-outline-primary" %>
+    </td>
+    <td>
+      <%= link_to "削除",admin_category_path(categoriy.id), method: :delete, "data-confirm" => "本当に削除しますか？" ,class:"btn btn-outline-danger" %>
+    </td>
+
   </tr>
   <% end %>
 </tbody>
+</table>
+</div>
+</div>
+</div>

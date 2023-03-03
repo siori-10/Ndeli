@@ -2,6 +2,12 @@
 <li>
   <%= link_to"ログアウト",destroy_customer_session_path, method: :delete ,class:"btn btn-outline-dark" %>
 </li>
+<li>
+  <%= link_to "レシピを投稿",new_recipe_path %>
+</li>
+<li>
+  <%=link_to "マイページ", customers_my_page_path %>
+</li>
 
 <% else %>
 <li>

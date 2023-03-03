@@ -11,7 +11,7 @@ devise_for :customers,skip: [:passwords], controllers: {
   registrations: "public/registrations",
   sessions: 'public/sessions'
 }
-#devise_for :customers
+
 
 
 
@@ -26,8 +26,9 @@ devise_for :customers,skip: [:passwords], controllers: {
     patch "customers/withdraw" => "customers#withdraw"
   end
   scope module: :public do
-    resources :recipes, only: [:new, :index, :edit, :show ]
-
+    resources :recipes, only: [:new, :index, :edit, :show, :create, :destroy ]
+    resources :materials, only: [:create, :destroy]
+    resources :material_recipes, only: [:create, :destroy]
   end
   scope module: :public do
     get root to:"homes#top"
@@ -38,10 +39,10 @@ devise_for :customers,skip: [:passwords], controllers: {
     resources :comments, only: [:index, :destroy]
   end
   namespace :admin do
-    resources :customers, only: [:show, :edit, :update]
+    resources :customers, only: [:index, :show, :edit, :update]
   end
   namespace :admin do
-    resources :categories, only: [:edit, :create, :update]
+    resources :categories, only: [:index, :edit, :create, :update, :destroy]
   end
   namespace :admin do
     resources :recipes, only: [:show, :edit, :update]

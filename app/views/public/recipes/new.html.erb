@@ -1,2 +1,38 @@
-<h1>Public::Recipes#new</h1>
-<p>Find me in app/views/public/recipes/new.html.erb</p>
+<p><storong>レシピを書く</storong></p>
+
+<%= form_with model: @recipe,url: recipes_path, method: :post do |f| %>
+  <p>レシピのタイトル</p>
+  <%= f.text_field :dish_name %>
+  <P>料理の写真を載せる</P>
+  <%= f.file_field :didh_image,  accept: "image/*" %>
+
+  <P>レシピ紹介文</P>
+  <%= f.text_area :recipe_description %>
+
+  <P><storong>料理の材料</storong></P>
+
+  <%= f.text_field :number_people %>何人分（例 ２人分）
+
+  <%= f.fields_for :materials do |t| %>
+    <%= render "public/recipes/material_fields", f: t %>
+  <% end %>
+  <div id="detail-association-insertion-point"></div>
+
+  <div class="col-10 mx-auto mt-2">
+    <%= link_to_add_association "+フォームを追加", f, :materials,
+    class: "btn btn-secondary btn-block",
+    data: {
+    association_insertion_node: '#detail-association-insertion-point',
+    association_insertion_method: 'after'
+    }%>
+  </div>
+  <td>
+                <%= f.text_area :procedure %>
+            </td>
+            <td>
+                <%= f.file_field :procedure_image, accept: "image/*" %>
+            </td>
+  <%= f.submit 'レシピを投稿',class:"btn btn-outline-warning" %>
+<%= f.submit '下書きで保存',class:"btn btn-outline-info" %>
+<% end %>
+

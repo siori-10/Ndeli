@@ -11,5 +11,6 @@ class Customer < ApplicationRecord
       customer.self_introduction = ''
     end
   end
-
+  
+ has_many :recipes
 end
