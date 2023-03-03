@@ -1,3 +1,4 @@
+<div class=container>
 <p><storong>レシピを書く</storong></p>
 
 <%= form_with model: @recipe,url: recipes_path, method: :post do |f| %>
@@ -27,12 +28,18 @@
     }%>
   </div>
   <td>
-                <%= f.text_area :procedure %>
-            </td>
-            <td>
-                <%= f.file_field :procedure_image, accept: "image/*" %>
-            </td>
+    <%= f.text_area :procedure %>
+  </td>
+  <td>
+    <%= f.file_field :procedure_image, accept: "image/*" %>
+  </td>
+  
+  <p><storong>カテゴリーを選択</storong></p>
+  <%= f.collection_select :categoriy_id, Categoriy.all, :id, :categoriy_name %>
+  
+  
   <%= f.submit 'レシピを投稿',class:"btn btn-outline-warning" %>
 <%= f.submit '下書きで保存',class:"btn btn-outline-info" %>
 <% end %>
 
+</div>

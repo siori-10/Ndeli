@@ -13,4 +13,5 @@ class Customer < ApplicationRecord
   end
   
  has_many :recipes
+ has_many :favorites, dependent: :destroy 
 end

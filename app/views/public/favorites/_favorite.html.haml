@@ -1,0 +1,16 @@
+#favorite{ id: @recipe.id }
+// お気に入り未登録の時
+  - if !Favorite.exists?(customer: current_customer, recipe_id: @recipe.id)
+    = link_to recipe_favorites_path(@recipe), method: :post, remote: true, class: "favorite-btn favorite-post" do
+      .i.far.fa-thumbs-up
+        %span いいね！
+        = @recipe.favorites.length
+        // お気に入り登録数
+  - else
+  // お気に入り登録済みの時
+    = link_to recipe_favorites_path(@recipe), method: :delete, remote: true, class: "favorite-btn favorite-delete" do
+      .i.far.fa-thumbs-up
+        %span いいね！
+        = @recipe.favorites.length
+        // お気に入り登録数
+       

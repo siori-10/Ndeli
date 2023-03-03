@@ -2,6 +2,7 @@ class Public::RecipesController < ApplicationController
   def new
     @recipe = Recipe.new
     @recipe.materials.new
+    @recipes = Recipe.all
   end
 
   def create
