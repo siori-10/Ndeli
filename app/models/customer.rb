@@ -11,6 +11,7 @@ class Customer < ApplicationRecord
       customer.self_introduction = ''
     end
   end
+  has_one_attached :profile_image
   
  has_many :recipes
  has_many :favorites, dependent: :destroy 
