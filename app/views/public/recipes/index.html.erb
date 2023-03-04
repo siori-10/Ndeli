@@ -1,3 +1,7 @@
 
 のレシピ
+<% if @search_recipes %>
+<% render partial: 'recipes/recipe', collection: @search_recipes %>
+<% else %>
 <% render partial: 'recipes/recipe', collection: @recipes %>
+<% end %>

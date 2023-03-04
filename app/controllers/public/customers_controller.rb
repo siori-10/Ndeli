@@ -1,8 +1,8 @@
 class Public::CustomersController < ApplicationController
  
   def show
-     @customer = Customer.find(params[:id])
-     @recipes = @customer.recipes[:recipe_id]
+     @customer= current_customer
+     @recipes = @customer.recipes
 
     favorites = Favorite.where(customer_id: current_customer.id).pluck(:recipe_id)  # ログイン中の会員のお気に入りのrecipe_idカラムを取得
     @favorite_list = Recipe.find(favorites)     # recipesテーブルから、お気に入り登録済みのレコードを取得
@@ -23,6 +23,6 @@ class Public::CustomersController < ApplicationController
    
   private
   def customer_params
-    params.require(:customer).permit(:nickname, :email,  :profile_image)
+    params.require(:customer).permit(:nickname, :email, :profile_image, :self_introduction)
   end
 end

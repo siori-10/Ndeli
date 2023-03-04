@@ -1,2 +1,25 @@
-<h1>Admin::Recipes#show</h1>
-<p>Find me in app/views/admin/recipes/show.html.erb</p>
+<%= image_tag @recipe.get_image(200,200) %>
+
+<%= image_tag @customer.get_image_profile(100,100) %>
+<%= @customer.nickname %>
+<%= @recipe.recipe_description %>
+
+
+
+
+
+
+<table>
+  <thead>
+    <tr>
+      <th>作り方</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><%= image_tag @recipe.get_image2(100,100) %><%= @recipe.procedure  %></td>
+    </tr>
+  </tbody>
+</table>
+
+<P><storong>コメント</storong></P>

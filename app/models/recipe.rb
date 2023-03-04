@@ -4,15 +4,35 @@ class Recipe < ApplicationRecord
 has_one_attached :dish_image
 has_one_attached :procedure_image
 
+def get_image(width, height)# 料理画像
+    unless dish_image.attached?
+      file_path = Rails.root.join('app/assets/images/no_image.jpg')
+      image.attach(io: File.open(file_path), filename: 'default-image.jpg', content_type: 'image/jpeg')
+    end
+    image.variant(resize_to_limit: [width, height]).processed
+end
+
+def get_image2(width, height)# 手順画像
+    unless procedure_image.attached?
+      file_path = Rails.root.join('app/assets/images/no_image.jpg')
+      image.attach(io: File.open(file_path), filename: 'default-image.jpg', content_type: 'image/jpeg')
+    end
+    image.variant(resize_to_limit: [width, height]).processed
+end
+def self.ransackable_attributes(auth_object = nil)
+    ["categoriy_id", "created_at", "customer_id", "dish_name", "id", "is_draft", "numder_people", "procedure", "recipe_description", "tag_id", "updated_at"]
+end
 
    has_many :customers, dependent: :destroy
-   
+
    has_many :favorites, dependent: :destroy
    # belongs_to :customers, optional :true　#レシピ/お気に入り１：多
    # ↑お気に入り機能作ったときに入れた
    belongs_to :categoriy
    has_many :materials
-   belongs_to :tag
+   has_many :tag_recipes, dependent: :destroy
+   has_many :tags, through: :tag_recipes, dependent: :destroy
+
    belongs_to :comment
    accepts_nested_attributes_for :materials, allow_destroy: true
 end

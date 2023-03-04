@@ -1,2 +1,34 @@
-<h1>Public::Customers#show</h1>
-<p>Find me in app/views/public/customers/show.html.erb</p>
+<div class="container mt-5">
+
+<%= image_tag @customer.get_image_profile(200,200) %>
+<%= @customer.nickname %>
+<%= @customer.self_introduction %>
+
+<%= link_to "会員情報編集", customers_information_edit_path, class:"btn btn-primary"%>
+<table>
+    <tbody>
+        <tr>
+            <td><%= link_to "マイページ", customers_my_page_path %></td>
+            
+            <td><%= link_to "お気に入り一覧", favorites_path %></td>
+        </tr>
+    </tbody>
+</table>
+
+
+<table>
+    <P><strong>会員情報</strong></P>
+    <tbody>
+        <tr>
+            <td>ニックネーム</td>
+            <td><%= @customer.nickname %></td>
+        </tr>
+        <tr>
+            <td>メールアドレス</td>
+            <td><% @customer.email %></td>
+        </tr>
+    </tbody>
+</table>
+
+
+</div>
