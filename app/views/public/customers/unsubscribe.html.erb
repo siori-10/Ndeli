@@ -1,2 +1,15 @@
-<h1>Public::Customers#unsubscribe</h1>
-<p>Find me in app/views/public/customers/unsubscribe.html.erb</p>
+<div class="container mt-5">
+<p><strong>Ndeliの会員登録を削除する</strong></p>
+<div class="row">
+  <div class="col border border-3 border border-secondary rounded-3">
+<p></p>    
+退会について<br>
+退会されますと投稿したレシピ、お気に入りに入れたレシピなど<br>
+すべてのデータが削除されます<br>
+退会する場合は、「退会する」をクリックしてください。<br>
+<p></p>
+<%= link_to "退会しない",customers_information_edit_path, class:"btn btn-outline-primary" %>
+<%= link_to "退会する",customers_withdraw_path, method: :patch, "data-confirm" => "本当に退会しますか？", class:"btn btn-outline-danger" %>
+</div>
+</div>
+</div>
