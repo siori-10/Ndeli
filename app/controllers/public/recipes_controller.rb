@@ -2,13 +2,13 @@ class Public::RecipesController < ApplicationController
   def new
     @recipe = Recipe.new
     @recipe.materials.new
-    @recipes = Recipe.all
+    @recipe.recipe_descriptions.new
   end
 
   def create
-    @recire = Recipe.new(recipe_params)
-    @recire.customer_id = current_customer.id
-    if @recipe.save
+    @recipe = Recipe.new(recipe_params)
+    @recipe.customer_id = current_customer.id
+    if @recipe.save!
       redirect_to recipe_path
     end
   end
@@ -26,6 +26,13 @@ class Public::RecipesController < ApplicationController
   end
 
   def edit
+    @recipe = Recipe.find(params[:id])
+  end
+
+  def update
+    @recipe = Recipe.find(params[:id])
+    @recipe.update(recipe_params)
+    redirect_to recipe_path(@recipe)
   end
 
   def show
@@ -35,8 +42,10 @@ class Public::RecipesController < ApplicationController
    private
 
   def recipe_params
-    params.require(:recipe).permit(:dish_name, :recipe_description, :number_people, :procedure, :didh_image, :procedure_image, :categoriy_id, :customer_id,
-    material_attributes:[:material_name, :quantity, :_destroy], tag_ids: [])
+    params.require(:recipe).permit(:dish_name, :recipe_description, :number_people, :dish_image, :categoriy_id, :customer_id,
+    materials_attributes: [:id, :material_name, :quantity, :_destroy],
+    recipe_descriptions_attributes: [:id, :description, :procedure_image, :_destroy],
+    tag_ids: [])
   end
 
 end

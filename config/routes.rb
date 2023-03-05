@@ -27,9 +27,9 @@ devise_for :customers,skip: [:passwords], controllers: {
     # get :favorites, on: :collection
   end
   scope module: :public do
-    resources :recipes, only: [:new, :index, :edit, :show, :create, :destroy ]do
+    resources :recipes do
     resource :favorites, only: [:create, :destroy]
-    end 
+    end
     resources :materials, only: [:create, :destroy]
     resources :material_recipes, only: [:create, :destroy]
   end
@@ -40,17 +40,9 @@ devise_for :customers,skip: [:passwords], controllers: {
 
   namespace :admin do
     resources :comments, only: [:index, :destroy]
-  end
-  namespace :admin do
     resources :customers, only: [:index, :show, :edit, :update]
-  end
-  namespace :admin do
     resources :categories, only: [:index, :edit, :create, :update, :destroy]
-  end
-  namespace :admin do
     resources :recipes, only: [:show, :edit, :update]
-  end
-  namespace :admin do
     root to:"homes#top"
   end
 

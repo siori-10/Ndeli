@@ -1,2 +1,25 @@
-<h1>Public::Recipes#show</h1>
-<p>Find me in app/views/public/recipes/show.html.erb</p>
+<div class="container">
+  
+  <h2><%= @recipe.dish_name %>の作り方</h2>
+  <h3>原材料</h3>
+  <ul>
+    <% @recipe.materials.each do |material| %>
+      <li><%= "#{material.material_name} - #{material.quantity}" %></li>
+    <% end %>
+  </ul>
+  <h3>手順</h3>
+  <% @recipe.recipe_descriptions.each do |recipe_description| %>
+    <div class="row">
+      <div class="col-md-4">
+        <% if recipe_description.procedure_image.attached? %>
+          <%= image_tag recipe_description.procedure_image.variant(resize: "500x500^").processed, class: 'img-fluid' %>
+        <% else %>
+          <%= image_tag 'no_image.jpg', class: 'img-fluid' %>
+        <% end %>
+      </div>
+      <div class="col-md-8">
+        <%= recipe_description.description %>
+      </div>
+    </div>
+  <% end %>
+</div>

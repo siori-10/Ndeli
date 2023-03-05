@@ -1,0 +1,60 @@
+<p>レシピのタイトル</p>
+<%= f.text_field :dish_name %>
+<P>料理の写真を載せる</P>
+<%= f.file_field :dish_image,  accept: "image/*" %>
+
+<P>レシピ紹介文</P>
+<%= f.text_area :recipe_description %>
+
+<P><storong>料理の材料</storong></P>
+
+<%= f.text_field :number_people %>何人分（例 ２人分）
+
+<%= f.fields_for :materials do |m| %>
+  <%= render "public/recipes/material_fields", f: m %>
+<% end %>
+<div id="materials-fields"></div>
+
+<div class="form-group">
+  <div class="col-10 mx-auto mt-2">
+    <%= link_to_add_association "+フォームを追加", f, :materials,
+    class: "btn btn-secondary btn-block",
+    data: {
+      association_insertion_node: '#materials-fields',
+      association_insertion_method: 'after'
+    }%>
+  </div>
+</div>
+
+<%= f.fields_for :recipe_descriptions do |rd| %>
+  <%= render "public/recipes/recipe_description_fields", f: rd %>
+<% end %>
+<div id="recipe_description"></div>
+
+<div class="form-group">
+  <div class="col-10 mx-auto mt-2">
+    <%= link_to_add_association "+フォームを追加", f, :recipe_descriptions,
+    class: "btn btn-secondary btn-block",
+    data: {
+      association_insertion_node: '#recipe_description',
+      association_insertion_method: 'after'
+    }%>
+  </div>
+</div>
+
+<p><storong>カテゴリーを選択</storong></p>
+<%= f.collection_select :categoriy_id, Categoriy.all, :id, :categoriy_name %>
+
+<div class='form-group'>
+      <%= f.collection_check_boxes(:tag_ids, Tag.all, :id, :tag_name) do |tag| %>
+          <div class='form-check'>
+              <%= tag.label class: 'form-check-label' do %>
+                  <%= tag.check_box class: 'form-check-input' %>
+                  <%= tag.text %>
+              <% end %>
+          </div>
+      <% end %>
+  </div>
+
+<%= f.submit 'レシピを投稿',class:"btn btn-outline-warning" %>
+<%= f.submit '下書きで保存',class:"btn btn-outline-info" %>

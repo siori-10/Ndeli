@@ -1,2 +1,5 @@
-<h1>Public::Recipes#edit</h1>
-<p>Find me in app/views/public/recipes/edit.html.erb</p>
+<div class="container">
+  <%= form_with model: @recipe, url: recipe_path, method: :put do |f| %>
+    <%= render partial: 'form', locals: {f: f} %>
+  <% end %>
+</div>

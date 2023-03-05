@@ -2,7 +2,7 @@ class Recipe < ApplicationRecord
 
 # 料理画像、手順画像
 has_one_attached :dish_image
-has_one_attached :procedure_image
+# has_many_attached :procedure_image
 
 def get_image(width, height)# 料理画像
     unless dish_image.attached?
@@ -30,9 +30,12 @@ end
    # ↑お気に入り機能作ったときに入れた
    belongs_to :categoriy
    has_many :materials
+   has_many :recipe_descriptions
    has_many :tag_recipes, dependent: :destroy
    has_many :tags, through: :tag_recipes, dependent: :destroy
 
-   belongs_to :comment
-   accepts_nested_attributes_for :materials, allow_destroy: true
+   has_many :comment
+
+   accepts_nested_attributes_for :materials, reject_if: :all_blank, allow_destroy: true
+   accepts_nested_attributes_for :recipe_descriptions, reject_if: :all_blank, allow_destroy: true
 end
