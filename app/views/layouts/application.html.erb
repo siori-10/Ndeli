@@ -15,7 +15,7 @@
        <nav class="navbar navbar-expand-lg navbar-white border-bottom">
         <div class="container">
           <a class="navbar-brand">Ndeli</a>
-            <%= search_form_for @search,url: recipes_path do |f| %>
+            <%= search_form_for @search,url: recipes_path,method: :get do |f| %>
             <%= f.text_field :dish_name_cont, placeholder: '名前を入力...' %>
             <%= f.submit ("検索する") %>
             <% end %>

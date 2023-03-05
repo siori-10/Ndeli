@@ -1,7 +1,27 @@
-
-のレシピ
-<% if @search_recipes %>
-<% render partial: 'recipes/recipe', collection: @search_recipes %>
+<% if @word %>
+<h2><%= @word %>のレシピ</h2>
 <% else %>
-<% render partial: 'recipes/recipe', collection: @recipes %>
+<h2>すべてのレシピ</h2>
 <% end %>
+
+<table>
+  <tbody>
+  <% if @search_recipes %>
+    <%  @search_recipes.each do |recipe| %>
+    <tr>
+      <td><%= link_to recipe_path(recipe.id) do %><%= image_tag recipe.get_image(200,200) %><% end %></td>
+      <td><%= recipe.dish_name %></td>
+      <td><%= recipe.recipe_description %></td>
+    </tr>
+  <% end %>
+<% else %>
+  <%  @recipes.each do |recipe| %>
+  <tr>
+    <td><%= link_to recipe_path(recipe.id) do %><%= image_tag recipe.get_image(200,200) %><% end %></td>
+    <td><%= recipe.dish_name %></td>
+    <td><%= recipe.recipe_description %></td>
+  </tr>
+    <% end %>
+<% end %>
+</tbody>
+</table>

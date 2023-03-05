@@ -1,6 +1,10 @@
 <div class="container">
-  
+  <% @recipe.tags.each do |tag| %>
+    <span><%= tag.tag_name %></span>
+    <%= link_to "お気に入り", recipe_favorites_path(@recipe),method: :post　%>
+<% end %>
   <h2><%= @recipe.dish_name %>の作り方</h2>
+  <%= image_tag @recipe.get_image(200,200) %>
   <h3>原材料</h3>
   <ul>
     <% @recipe.materials.each do |material| %>

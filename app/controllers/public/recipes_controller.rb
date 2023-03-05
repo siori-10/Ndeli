@@ -9,8 +9,8 @@ class Public::RecipesController < ApplicationController
     @recipe = Recipe.new(recipe_params)
     @recipe.customer_id = current_customer.id
     if @recipe.save!
-      redirect_to recipe_path
-    end
+      redirect_to recipe_path(@recipe)
+    end 
   end
 
   def destroy
@@ -22,7 +22,12 @@ class Public::RecipesController < ApplicationController
   end
 
   def index
-    @recipes = Recipe.all
+    if params[:q]
+      @word = params[:q][:dish_name_cont]
+    end
+    @recipes = Recipe.all.page(params[:page])
+    @search = Recipe.ransack(params[:q])
+    @search_recipes = @search.result
   end
 
   def edit
@@ -37,6 +42,10 @@ class Public::RecipesController < ApplicationController
 
   def show
     @recipe = Recipe.find(params[:id])
+  end
+  
+  def my_recipes
+    @recipes = current_customer.recipes
   end
 
    private
