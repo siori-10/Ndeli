@@ -10,15 +10,13 @@ class Public::RecipesController < ApplicationController
     @recipe.customer_id = current_customer.id
     if @recipe.save!
       redirect_to recipe_path(@recipe)
-    end 
+    end
   end
 
   def destroy
     recipe = Recipe.find(params[:id])
-    material = Material.find(params[:id])
     recipe.destroy
-    material.destroy
-    redirect_to recipe_path
+    redirect_to my_recipes_recipes_path
   end
 
   def index
@@ -42,14 +40,18 @@ class Public::RecipesController < ApplicationController
 
   def show
     @recipe = Recipe.find(params[:id])
+    @customer = Customer.find(@recipe.customer.id)
+    @comment = Comment.new
+    # @recipes = current_customer.recipes.all
+
+
   end
-  
+
   def my_recipes
-    @recipes = current_customer.recipes
+    @recipes = current_customer.recipes.page(params[:page])
   end
 
    private
-
   def recipe_params
     params.require(:recipe).permit(:dish_name, :recipe_description, :number_people, :dish_image, :categoriy_id, :customer_id,
     materials_attributes: [:id, :material_name, :quantity, :_destroy],

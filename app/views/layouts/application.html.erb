@@ -14,7 +14,9 @@
     <header>
        <nav class="navbar navbar-expand-lg navbar-white border-bottom">
         <div class="container">
-          <a class="navbar-brand">Ndeli</a>
+          <div class="logo_area">
+          <a class="navbar-brand"><%= link_to root_path do %><%= image_tag 'logo.jpg',:size =>'150x150',class:"logo image_switch" %><% end %></a>
+          </div>
             <%= search_form_for @search,url: recipes_path,method: :get do |f| %>
             <%= f.text_field :dish_name_cont, placeholder: '名前を入力...' %>
             <%= f.submit ("検索する") %>

@@ -1,3 +1,4 @@
+<div class="container mt-5">
 <p><strong>投稿したレシピ</strong></p>
 
 <table>
@@ -6,6 +7,11 @@
     <td><%= link_to recipe_path(recipe.id) do %><%= image_tag recipe.get_image(200,200) %><% end %></td>
     <td><%= recipe.dish_name %></td>
     <td><%= recipe.recipe_description %></td>
+    <td><%= link_to "レシピを編集する",edit_recipe_path(recipe.id), class:"btn btn-success"%></td>
+    <td><%= link_to "削除する",recipe_path(recipe.id), method: :delete, "data-confirm" => "本当に削除しますか？" ,class:"btn btn-danger" %></td>
   </tr>
+
   <% end %>
 </table>
+</div>
+<%= paginate @recipes %>

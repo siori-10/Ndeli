@@ -1,5 +1,5 @@
 <div class="container mt-5">
-
+<h4>マイページ</h4>
 <%= image_tag @customer.get_image_profile(200,200) %>
 <%= @customer.nickname %>
 <%= @customer.self_introduction %>
@@ -8,9 +8,8 @@
 <table>
     <tbody>
         <tr>
-            <td><%= link_to "マイページ", customers_my_page_path %></td>
-
-            <td><%= link_to "お気に入り一覧", favorites_path %></td>
+            <td><%= link_to "お気に入りレシピ", favorites_path %></td>
+            <td><%= link_to "マイレシピ", my_recipes_recipes_path %></td>
         </tr>
     </tbody>
 </table>

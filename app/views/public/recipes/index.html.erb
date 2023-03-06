@@ -1,5 +1,6 @@
+<div class="container mt-5">
 <% if @word %>
-<h2><%= @word %>のレシピ</h2>
+<h2><%= @word %>のレシピ</h2>dish_name
 <% else %>
 <h2>すべてのレシピ</h2>
 <% end %>
@@ -25,3 +26,5 @@
 <% end %>
 </tbody>
 </table>
+<%= paginate @recipes %>
+</div>

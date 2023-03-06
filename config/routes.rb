@@ -24,14 +24,15 @@ devise_for :customers,skip: [:passwords], controllers: {
     patch "customers/information" => "customers#update"
     get "customers/unsubscribe" => "customers#unsubscribe"
     patch "customers/withdraw" => "customers#withdraw"
-    
+
   end
   scope module: :public do
     resources :recipes do
       resource :favorites, only: [:create, :destroy]
       collection do
         get 'my_recipes'
-      end 
+      end
+      resources :comments, only: [:create]
     end
     resources :materials, only: [:create, :destroy]
     resources :material_recipes, only: [:create, :destroy]
@@ -45,7 +46,7 @@ devise_for :customers,skip: [:passwords], controllers: {
     resources :comments, only: [:index, :destroy]
     resources :customers, only: [:index, :show, :edit, :update]
     resources :categories, only: [:index, :edit, :create, :update, :destroy]
-    resources :recipes, only: [:show, :edit, :update]
+    resources :recipes, only: [:show, :edit, :update,:destroy]
     root to:"homes#top"
   end
 

@@ -1,22 +1,31 @@
 <div class="container">
+
+<!--タグ-->
   <% @recipe.tags.each do |tag| %>
     <span><%= tag.tag_name %></span>
+    <% if customer_signed_in? && @recipe.customer.id != current_customer.id %>
     <%= link_to "お気に入り", recipe_favorites_path(@recipe),method: :post　%>
-<% end %>
-  <h2><%= @recipe.dish_name %>の作り方</h2>
+    <% end %>
+<% end %><br>
+
+<%= image_tag @customer.get_image_profile(200,200) %>
+<%= @customer.nickname %>
+<%= @customer.self_introduction %>
+
+  <h2><%= @recipe.dish_name %></h2>
   <%= image_tag @recipe.get_image(200,200) %>
-  <h3>原材料</h3>
+  <h4>材料</h4>
   <ul>
     <% @recipe.materials.each do |material| %>
       <li><%= "#{material.material_name} - #{material.quantity}" %></li>
     <% end %>
   </ul>
-  <h3>手順</h3>
+  <h4>手順</h4>
   <% @recipe.recipe_descriptions.each do |recipe_description| %>
     <div class="row">
       <div class="col-md-4">
         <% if recipe_description.procedure_image.attached? %>
-          <%= image_tag recipe_description.procedure_image.variant(resize: "500x500^").processed, class: 'img-fluid' %>
+          <%= image_tag recipe_description.procedure_image.variant(resize: "100x100^").processed, class: 'img-fluid' %>
         <% else %>
           <%= image_tag 'no_image.jpg', class: 'img-fluid' %>
         <% end %>
@@ -26,4 +35,17 @@
       </div>
     </div>
   <% end %>
+
+  <P>コメントを投稿する</P>
+  <%= form_with model:@comment,url: recipe_comments_path(@recipe), method: :post do |f| %>
+    <%= f.text_area :content, placeholder: '本文' %>
+    <%= f.submit '投稿',class:"btn btn-primary" %>
+  <% end %>
+
+    <p>コメント一覧</p>
+    <% @recipe.comments.each do |comment| %>
+    <p><%= comment.customer.nickname %></p>
+    <p><%= comment.content %></p>
+    <% end %>
+
 </div>

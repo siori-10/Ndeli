@@ -23,18 +23,18 @@ def self.ransackable_attributes(auth_object = nil)
     ["categoriy_id", "created_at", "customer_id", "dish_name", "id", "is_draft", "numder_people", "procedure", "recipe_description", "tag_id", "updated_at"]
 end
 
-   has_many :customers, dependent: :destroy
+  # has_many :customers, dependent: :destroy
 
    has_many :favorites, dependent: :destroy
    belongs_to :customer, optional: :true　#レシピ/お気に入り１：多
    # ↑お気に入り機能作ったときに入れた
    belongs_to :categoriy
-   has_many :materials
+   has_many :materials, dependent: :destroy
    has_many :recipe_descriptions
    has_many :tag_recipes, dependent: :destroy
    has_many :tags, through: :tag_recipes, dependent: :destroy
 
-   has_many :comment
+   has_many :comments, dependent: :destroy
 
    accepts_nested_attributes_for :materials, reject_if: :all_blank, allow_destroy: true
    accepts_nested_attributes_for :recipe_descriptions, reject_if: :all_blank, allow_destroy: true

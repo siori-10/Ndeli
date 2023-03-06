@@ -7,6 +7,7 @@
     <td><%= link_to recipe_path(recipe.id) do %><%= image_tag recipe.get_image(200,200) %><% end %></td>
     <td><%= recipe.dish_name %></td>
     <td><%= recipe.recipe_description %></td>
+    <td><%= link_to "お気に入り解除",recipe_favorites_path(recipe.id), method: :delete, "data-confirm" => "お気に入り解除しますか？" ,class:"btn btn-danger" %></td>
   </tr>
   <% end %>
 </table>

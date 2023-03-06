@@ -7,6 +7,7 @@ class Customer < ApplicationRecord
   has_one_attached :profile_image
   has_many :recipes, dependent: :destroy
   has_many :favorites, dependent: :destroy
+  has_many :comments
 
   def self.guest
     find_or_create_by!(email: 'guest@guest.com') do |customer|
@@ -27,6 +28,6 @@ class Customer < ApplicationRecord
   #退会済みの会員が同じアカウントでログイン出来ないようにする
   def active_for_authentication?
   super && (is_deleted == false)
-end 
+  end 
 
 end

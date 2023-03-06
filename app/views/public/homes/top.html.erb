@@ -1,2 +1,18 @@
-<h1>Public::Homes#top</h1>
-<p>Find me in app/views/public/homes/top.html.erb</p>
+<div class="container mt-5">
+
+  <h4>新着レシピ</h4>
+  <p></p>
+  <table>
+    <tbody>
+      <% @recipes.each do |recipe| %>
+        <tr>
+          <td><%= link_to recipe_path(recipe.id) do %><%= image_tag recipe.get_image(200,200) %><% end %></td>
+          <td><%= recipe.dish_name %></td>
+          <td><%= recipe.recipe_description %></td>
+        </tr>
+        <% end %>
+    </tbody>
+  </table>
+  <%= link_to "すべてのレシピを見る", recipes_path %>
+  <%= paginate @recipes %>
+</div>
