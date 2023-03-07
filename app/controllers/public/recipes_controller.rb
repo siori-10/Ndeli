@@ -20,13 +20,28 @@ class Public::RecipesController < ApplicationController
   end
 
   def index
+     @categories = Categoriy.all
     if params[:q]
       @word = params[:q][:dish_name_cont]
+      @search = Recipe.ransack(params[:q])
+      @recipes = @search.result.page(params[:page])
+    else
+    # @recipes = params[:tag_id].present? ? Tag.find(params[:tag_id]).recipes.page(params[:page]) : Recipe.all.page(params[:page])
+
+      if params[:categoriy_id] == nil
+        @recipes = Recipe.all.page(params[:page])
+      else
+        @recipes = Recipe.where(categoriy_id:params[:categoriy_id]).page(params[:page])
+
+      end
     end
-    @recipes = Recipe.all.page(params[:page])
-    @search = Recipe.ransack(params[:q])
-    @search_recipes = @search.result
+
+    #   @recipes = Item.where(genre_id: params[:genre_id])
+    #   # @name = Genre.find(params[:genre_id]).name
+    #   @categories = Categoriy.all
+    #   render :index
   end
+
 
   def edit
     @recipe = Recipe.find(params[:id])
@@ -43,8 +58,6 @@ class Public::RecipesController < ApplicationController
     @customer = Customer.find(@recipe.customer.id)
     @comment = Comment.new
     # @recipes = current_customer.recipes.all
-
-
   end
 
   def my_recipes
@@ -58,5 +71,4 @@ class Public::RecipesController < ApplicationController
     recipe_descriptions_attributes: [:id, :description, :procedure_image, :_destroy],
     tag_ids: [])
   end
-
 end

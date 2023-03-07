@@ -27,7 +27,6 @@ end
 
    has_many :favorites, dependent: :destroy
    belongs_to :customer, optional: :true　#レシピ/お気に入り１：多
-   # ↑お気に入り機能作ったときに入れた
    belongs_to :categoriy
    has_many :materials, dependent: :destroy
    has_many :recipe_descriptions

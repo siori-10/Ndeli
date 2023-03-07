@@ -1,9 +1,10 @@
 <div class="container mt-5">
 
   <h4>新着レシピ</h4>
-  <p></p>
+  <div class="row">
   <table>
     <tbody>
+      
       <% @recipes.each do |recipe| %>
         <tr>
           <td><%= link_to recipe_path(recipe.id) do %><%= image_tag recipe.get_image(200,200) %><% end %></td>
@@ -13,6 +14,8 @@
         <% end %>
     </tbody>
   </table>
+  </div>
+ 
   <%= link_to "すべてのレシピを見る", recipes_path %>
   <%= paginate @recipes %>
 </div>

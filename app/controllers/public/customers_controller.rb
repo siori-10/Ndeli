@@ -14,7 +14,7 @@ class Public::CustomersController < ApplicationController
 
   def update
     @customer= current_customer
-    @customer.profile_image.attach(params[:customer][:get_image_profile])
+    # @customer.profile_image.attach(params[:customer][:image_profile])
     @customer.update(customer_params)
     redirect_to customers_my_page_path
   end
@@ -29,7 +29,6 @@ class Public::CustomersController < ApplicationController
     reset_session
     recipes = Recipe.where(customer_id: @customer.id)
     recipes.destroy_all
-    flash[:notice] = "退会しました"
     redirect_to root_path
   end
 

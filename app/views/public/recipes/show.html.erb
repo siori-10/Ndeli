@@ -1,25 +1,30 @@
-<div class="container">
+<div class="container mt-5">
+  <div class="row">
+    <dev class="col-lg-6">
+    <!--タグ-->
+      <% @recipe.tags.each do |tag| %>
+        <span><%= tag.tag_name %></span>
+        <% if customer_signed_in? && @recipe.customer.id != current_customer.id %>
+        <%= link_to "お気に入り", recipe_favorites_path(@recipe),method: :post　%>
+        <% end %>
+    <% end %><br>
 
-<!--タグ-->
-  <% @recipe.tags.each do |tag| %>
-    <span><%= tag.tag_name %></span>
-    <% if customer_signed_in? && @recipe.customer.id != current_customer.id %>
-    <%= link_to "お気に入り", recipe_favorites_path(@recipe),method: :post　%>
-    <% end %>
-<% end %><br>
 
-<%= image_tag @customer.get_image_profile(200,200) %>
-<%= @customer.nickname %>
-<%= @customer.self_introduction %>
+    <%= image_tag @customer.get_image_profile(100,100) %>
+    <%= @customer.nickname %>
+    <%= @customer.self_introduction %>
+
 
   <h2><%= @recipe.dish_name %></h2>
-  <%= image_tag @recipe.get_image(200,200) %>
+    <%= image_tag @recipe.get_image(200,200) %>
+    
   <h4>材料</h4>
   <ul>
     <% @recipe.materials.each do |material| %>
       <li><%= "#{material.material_name} - #{material.quantity}" %></li>
     <% end %>
   </ul>
+  
   <h4>手順</h4>
   <% @recipe.recipe_descriptions.each do |recipe_description| %>
     <div class="row">
@@ -35,17 +40,26 @@
       </div>
     </div>
   <% end %>
+  
+<% if customer_signed_in? && @recipe.customer.id != current_customer.id %>
 
-  <P>コメントを投稿する</P>
-  <%= form_with model:@comment,url: recipe_comments_path(@recipe), method: :post do |f| %>
-    <%= f.text_area :content, placeholder: '本文' %>
-    <%= f.submit '投稿',class:"btn btn-primary" %>
-  <% end %>
+  <h4>コメントを投稿する</h4>
+    <%= form_with model:@comment,url: recipe_comments_path(@recipe), method: :post do |f| %>
+      <%= f.text_area :content, placeholder: '本文' %>
+      <%= f.submit '投稿',class:"btn btn-primary" %>
+    <% end %>
+<% end %>
 
     <p>コメント一覧</p>
-    <% @recipe.comments.each do |comment| %>
-    <p><%= comment.customer.nickname %></p>
-    <p><%= comment.content %></p>
-    <% end %>
-
+    <table class="table">
+      <tbody>
+        <% @recipe.comments.each do |comment| %>
+        <tr>
+        <td><%= comment.customer.nickname %></td>
+        <td><%= comment.content %></td>
+        </tr>
+        <% end %>
+      </tbody>
+    </table>
+</div>
 </div>
