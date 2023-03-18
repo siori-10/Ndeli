@@ -30,8 +30,8 @@ end
    belongs_to :categoriy
    has_many :materials, dependent: :destroy
    has_many :recipe_descriptions
-   has_many :tag_recipes, dependent: :destroy
-   has_many :tags, through: :tag_recipes, dependent: :destroy
+#   has_many :tag_recipes, dependent: :destroy
+#   has_many :tags, through: :tag_recipes, dependent: :destroy
 
    has_many :comments, dependent: :destroy
 

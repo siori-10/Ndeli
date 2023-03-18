@@ -1,25 +1,24 @@
 <% if customer_signed_in? %>
-<li>
+<li class="btn_layout">
   <%= link_to "レシピ一覧",recipes_path,class:"btn btn-outline-dark" %>
 </li>
-
-<li>
+<li class="btn_layout">
   <%= link_to "レシピを投稿",new_recipe_path , class:"btn btn-outline-dark" %>
 </li>
-<li>
+<li class="btn_layout">
   <%=link_to "マイページ", customers_my_page_path, class:"btn btn-outline-dark" %>
 </li>
-<li>
+<li class="btn_layout">
   <%= link_to"ログアウト",destroy_customer_session_path, method: :delete ,class:"btn btn-outline-dark" %>
 </li>
 <% else %>
-<li>
+<li class="btn_layout">
   <%= link_to "新規登録", new_customer_registration_path, class:"btn btn-outline-dark"%>
 </li>
-<li>
+<li class="btn_layout">
   <%= link_to "ログイン", new_customer_session_path, class:"btn btn-outline-dark"%>
 </li>
-<li>
+<li class="btn_layout">
   <%= link_to "レシピ一覧",recipes_path,class:"btn btn-outline-dark" %>
 </li>
 <% end %>

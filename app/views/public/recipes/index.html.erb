@@ -15,13 +15,13 @@
 <h2>すべてのレシピ</h2>
 <% end %>
 
-<table>
+<table class="table">
   <tbody>
 
   <% @recipes.each do |recipe| %>
   <tr>
     <td><%= link_to recipe_path(recipe.id) do %><%= image_tag recipe.get_image(200,200) %><% end %></td>
-    <td><%= recipe.dish_name %></td>
+    <td><strong><%= recipe.dish_name %></strong></td>
     <td><%= recipe.recipe_description %></td>
   </tr>
     <% end %>

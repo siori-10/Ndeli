@@ -8,7 +8,7 @@
     <td><%= recipe.dish_name %></td>
     <td><%= recipe.recipe_description %></td>
     <td><%= link_to "レシピを編集する",edit_recipe_path(recipe.id), class:"btn btn-success"%></td>
-    <td><%= link_to "削除する",recipe_path(recipe.id), method: :delete, "data-confirm" => "本当に削除しますか？" ,class:"btn btn-danger" %></td>
+    <td><%= link_to "削除する",admin_comment_path(recipe.id), method: :delete, "data-confirm" => "本当に削除しますか？" ,class:"btn btn-danger" %></td>
   </tr>
 
   <% end %>

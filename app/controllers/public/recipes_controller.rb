@@ -26,20 +26,12 @@ class Public::RecipesController < ApplicationController
       @search = Recipe.ransack(params[:q])
       @recipes = @search.result.page(params[:page])
     else
-    # @recipes = params[:tag_id].present? ? Tag.find(params[:tag_id]).recipes.page(params[:page]) : Recipe.all.page(params[:page])
-
       if params[:categoriy_id] == nil
         @recipes = Recipe.all.page(params[:page])
       else
         @recipes = Recipe.where(categoriy_id:params[:categoriy_id]).page(params[:page])
-
       end
     end
-
-    #   @recipes = Item.where(genre_id: params[:genre_id])
-    #   # @name = Genre.find(params[:genre_id]).name
-    #   @categories = Categoriy.all
-    #   render :index
   end
 
 
@@ -68,7 +60,6 @@ class Public::RecipesController < ApplicationController
   def recipe_params
     params.require(:recipe).permit(:dish_name, :recipe_description, :number_people, :dish_image, :categoriy_id, :customer_id,
     materials_attributes: [:id, :material_name, :quantity, :_destroy],
-    recipe_descriptions_attributes: [:id, :description, :procedure_image, :_destroy],
-    tag_ids: [])
+    recipe_descriptions_attributes: [:id, :description, :procedure_image, :_destroy])
   end
 end

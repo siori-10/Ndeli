@@ -1,24 +1,26 @@
 <% if admin_signed_in? %>
 <!--管理者側のヘッダー-->
-<li>
+<li class="btn_layout">
   <%= link_to "レシピ一覧", admin_root_path, class:"btn btn-outline-dark" %>
 </li>
-<li>
+<li class="btn_layout">
   <%= link_to "カテゴリー一覧", admin_categories_path, class:"btn btn-outline-dark" %>
 </li>
-<li>
+<li class="btn_layout">
   <%= link_to "会員一覧",admin_customers_path , class:"btn btn-outline-dark" %>
 </li>
-<li>
+<li class="btn_layout">
   <%= link_to "ログアウト", destroy_admin_session_path, method: :delete , class:"btn btn-outline-dark"%>
 </li>
 
 <% else %>
-
-<li>
-  <%= link_to "新規登録", new_customer_registration_path, class:"btn btn-outline-dark" %>
+<li class="btn_layout">
+  <%= link_to "新規登録", new_customer_registration_path, class:"btn btn-outline-dark"%>
 </li>
-<li>
-  <%= link_to "ログイン", new_customer_session_path, class:"btn btn-outline-dark" %>
+<li class="btn_layout">
+  <%= link_to "ログイン", new_customer_session_path, class:"btn btn-outline-dark"%>
+</li>
+<li class="btn_layout">
+  <%= link_to "レシピ一覧",recipes_path,class:"btn btn-outline-dark" %>
 </li>
 <% end %>
