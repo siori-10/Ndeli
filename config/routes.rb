@@ -33,7 +33,9 @@ devise_for :customers,skip: [:passwords], controllers: {
         get 'my_recipes'
       end
       resources :comments, only: [:create]
+
     end
+    get "recipes_draft" => "recipes#draft"
     resources :materials, only: [:create, :destroy]
     resources :material_recipes, only: [:create, :destroy]
   end

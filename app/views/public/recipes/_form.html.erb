@@ -47,11 +47,8 @@
     <div class="col-9">
       <p><storong>カテゴリーを選択</storong></p>
         <%= f.collection_select :categoriy_id, Categoriy.all, :id, :categoriy_name, required: true%>
+    </div>
   </div>
-
-  <diV class="row">
-    <div class="col-3">
-      <%= f.submit 'レシピを投稿',class:"btn btn-outline-warning" %>
-    </diV>
-</div>
+    
+  
 </div>

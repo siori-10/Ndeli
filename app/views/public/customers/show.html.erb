@@ -1,6 +1,7 @@
 <div class="container mt-5 mb-5">
 
 <h4>マイページ</h4>
+<%= link_to "会員情報編集", customers_information_edit_path, class:"btn btn-primary"%>
 <div class="row">
     <div class"col-4">
 <%= image_tag @customer.get_image_profile(200,200) %>
@@ -10,18 +11,13 @@
    <%= @customer.self_introduction %>
 </div>
 </div>
-<div class="row">
-<%= link_to "会員情報編集", customers_information_edit_path, class:"btn btn-primary"%>
-</div>
-<table>
-    <tbody>
-        <tr>
-            <td><%= link_to "お気に入りレシピ", favorites_path %></td>
-            <td><%= link_to "マイレシピ", my_recipes_recipes_path %></td>
-        </tr>
-    </tbody>
-</table>
 
+
+<div class="row">
+
+</div>
+<div><%= link_to "お気に入りレシピ", favorites_path %></div>
+<div><%= link_to "マイレシピ", my_recipes_recipes_path %></div>
 
 
     <div class="row mt-4">

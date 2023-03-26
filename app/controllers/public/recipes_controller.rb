@@ -8,8 +8,18 @@ class Public::RecipesController < ApplicationController
   def create
     @recipe = Recipe.new(recipe_params)
     @recipe.customer_id = current_customer.id
-    if @recipe.save!
-      redirect_to recipe_path(@recipe)
+    if params[:post]
+      if @recipe.save!
+      redirect_to recipe_path(@recipe), notice: "レシピを投稿しました！"
+      else
+        render :new, alert: "登録できませんでした。お手数ですが、入力内容をご確認のうえ再度お試しください"
+      end
+    else
+      if @recipe.update(is_draft: true)
+        redirect_to recipes_draft_path(current_customer), notice: "レシピを下書き保存しました！"
+      else
+        render :new, alert: "登録できませんでした。お手数ですが、入力内容をご確認のうえ再度お試しください"
+      end
     end
   end
 
@@ -27,7 +37,7 @@ class Public::RecipesController < ApplicationController
       @recipes = @search.result.page(params[:page])
     else
       if params[:categoriy_id] == nil
-        @recipes = Recipe.all.page(params[:page])
+        @recipes = Recipe.where(is_draft:false).page(params[:page])
       else
         @recipes = Recipe.where(categoriy_id:params[:categoriy_id]).page(params[:page])
       end
@@ -41,8 +51,31 @@ class Public::RecipesController < ApplicationController
 
   def update
     @recipe = Recipe.find(params[:id])
-    @recipe.update(recipe_params)
-    redirect_to recipe_path(@recipe)
+    if params[:publicize_draft]
+      @recipe.attributes = recipe_params.merge(is_draft: false)
+      if @recipe.save(context: :publicize)
+        redirect_to recipe_path(@recipe.id), notice: "下書きのレシピを公開しました！"
+      else
+          @recipe.is_draft =true
+          render :edit, alert: "レシピを公開できませんでした。お手数ですが、入力内容をご確認のうえ再度お試しください"
+      end
+    elsif params[:update_post]
+      @recipe.attributes = recipe_params
+
+      if recipe.save(context: :publicize)
+        redirect_to recipe_path(@recipe.id), notice: "レシピを更新しました！"
+      end
+
+    else
+
+      if @recipe.update(recipe_params)
+      redirect_to recipe_path(@recipe), notice: "下書きレシピを更新しました！"
+      end
+    end
+  end
+
+  def draft
+     @recipes = current_customer.recipes.where(is_draft: true).page(params[:page])
   end
 
   def show
@@ -53,10 +86,10 @@ class Public::RecipesController < ApplicationController
   end
 
   def my_recipes
-    @recipes = current_customer.recipes.page(params[:page])
+    @recipes = current_customer.recipes.where(is_draft: false).page(params[:page])
   end
 
-   private
+  private
   def recipe_params
     params.require(:recipe).permit(:dish_name, :recipe_description, :number_people, :dish_image, :categoriy_id, :customer_id,
     materials_attributes: [:id, :material_name, :quantity, :_destroy],
