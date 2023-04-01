@@ -25,18 +25,18 @@ end
 
 
 with_options presence: true, on: :publicize do
-    
+
     validates :dish_image
     validates :dish_name
     validates :recipe_description
-    validates :material_name
-    validates :quantity
-    validates :description
+    #validates :material_name
+    #validates :quantity
+    #validates :description
   end
   validates :dish_name, length: { maximum: 14 }, on: :publicize
   validates :recipe_description, length: { maximum: 80 }, on: :publicize
-  
-  
+
+
   # has_many :customers, dependent: :destroy
 
    has_many :favorites, dependent: :destroy
@@ -51,6 +51,6 @@ with_options presence: true, on: :publicize do
 
    accepts_nested_attributes_for :materials, reject_if: :all_blank, allow_destroy: true
    accepts_nested_attributes_for :recipe_descriptions, reject_if: :all_blank, allow_destroy: true
-   
-   
+
+
 end

@@ -9,7 +9,7 @@ class Public::RecipesController < ApplicationController
     @recipe = Recipe.new(recipe_params)
     @recipe.customer_id = current_customer.id
     if params[:post]
-      if @recipe.save!
+      if @recipe.save(context: :publicize)
       redirect_to recipe_path(@recipe), notice: "レシピを投稿しました！"
       else
         render :new, alert: "登録できませんでした。お手数ですが、入力内容をご確認のうえ再度お試しください"
@@ -53,17 +53,30 @@ class Public::RecipesController < ApplicationController
     @recipe = Recipe.find(params[:id])
     if params[:publicize_draft]
       @recipe.attributes = recipe_params.merge(is_draft: false)
+      # @recipe.is_draft = false
+
       if @recipe.save(context: :publicize)
-        redirect_to recipe_path(@recipe.id), notice: "下書きのレシピを公開しました！"
+
+        if (@recipe.materials.size > 0) && (@recipe.recipe_descriptions.size > 0)
+           redirect_to recipe_path(@recipe.id), notice: "下書きのレシピを公開しました！"
+        else
+          @recipe.update(is_draft: false)
+          render :edit, alert: "レシピを公開できませんでした。お手数ですが、入力内容をご確認のうえ再度お試しください"
+        end
       else
-          @recipe.is_draft =true
+          #@recipe.is_draft = true
           render :edit, alert: "レシピを公開できませんでした。お手数ですが、入力内容をご確認のうえ再度お試しください"
       end
     elsif params[:update_post]
       @recipe.attributes = recipe_params
 
-      if recipe.save(context: :publicize)
-        redirect_to recipe_path(@recipe.id), notice: "レシピを更新しました！"
+      if @recipe.save(context: :publicize)
+        if (@recipe.materials.size > 0) && (@recipe.recipe_descriptions.size > 0)
+          redirect_to recipe_path(@recipe.id), notice: "レシピを更新しました！"
+        else
+          @recipe.update(is_draft: false)
+          render :edit, alert: "レシピを公開できませんでした。お手数ですが、入力内容をご確認のうえ再度お試しください"
+        end
       end
 
     else
@@ -91,7 +104,7 @@ class Public::RecipesController < ApplicationController
 
   private
   def recipe_params
-    params.require(:recipe).permit(:dish_name, :recipe_description, :number_people, :dish_image, :categoriy_id, :customer_id,
+    params.require(:recipe).permit(:dish_name, :recipe_description, :number_people, :dish_image, :categoriy_id, :customer_id , :material_name,
     materials_attributes: [:id, :material_name, :quantity, :_destroy],
     recipe_descriptions_attributes: [:id, :description, :procedure_image, :_destroy])
   end
