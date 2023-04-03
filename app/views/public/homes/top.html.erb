@@ -1,5 +1,14 @@
-<div class="container mt-5 mb-5">
+<div class="w-100 hero_img">
+  <div class="position-absolute w-100">
+    <%= image_tag "pasta-1854245_1280.jpg", class: 'pasta_img' %>
+  </div>
+  <div class="position-relative w-100 h-100 d-flex flex-column align-items-center justify-content-center">
+    <h2 class="hero_title">Ndeli</h2>
+    <p>～～あなたの為のレシピで健やかな毎日を～～</p>
+  </div>
+</div>
 
+<div class="container mt-5 mb-5">
   <h4>新着レシピ</h4>
   <div class="row">
   <table>
@@ -9,7 +18,7 @@
         <div class="top_recipe">
           <div class="recipe_image">
             <%= link_to recipe_path(recipe.id) do %>
-              <%= image_tag recipe.get_image(400,400) %>
+              <%= image_tag recipe.get_image(400,400), class: 'rounded' %>
             <% end %>
           </div>
           <div>
