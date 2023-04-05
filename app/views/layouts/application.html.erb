@@ -12,10 +12,10 @@
 
   <body>
     <header>
-       <nav class="navbar navbar-expand-lg navbar-white border-bottom">
+       <nav class="navbar navbar-expand-lg navbar-light border-bottom">
         <div class="container">
           <div class="logo_area">
-          <a class="navbar-brand"><%= link_to root_path do %><%= image_tag 'logo.jpg',:size =>'150x150',class:"logo image_switch" %><% end %></a>
+          <a class="navbar-brand p-3"><%= link_to root_path do %><%= image_tag 'logo.jpg',:size =>'150x150',class:"logo image_switch" %><% end %></a>
           </div>
             <%= search_form_for @search, url: request.path_info.include?("admin") ? admin_root_path : recipes_path, method: :get do |f| %>
             <%= f.text_field :dish_name_cont, placeholder: '名前を入力...' %>

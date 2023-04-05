@@ -7,6 +7,7 @@ devise_scope :customer do
   post 'customers/guest_saign_in', to: 'public/sessions#new_guest'
 end
 
+
 devise_for :customers,skip: [:passwords], controllers: {
   registrations: "public/registrations",
   sessions: 'public/sessions'

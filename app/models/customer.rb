@@ -11,9 +11,9 @@ class Customer < ApplicationRecord
 
   def self.guest
     find_or_create_by!(email: 'guest@guest.com') do |customer|
-      customer.password = SecureRandom.urlsafe_base64
       customer.nickname = 'ゲスト'
       customer.self_introduction = ''
+        customer.password = SecureRandom.urlsafe_base64
     end
   end
   # プロフィール画像
@@ -24,10 +24,10 @@ class Customer < ApplicationRecord
     end
     profile_image.variant(resize_to_limit: [width, height]).processed
   end
-  
+
   #退会済みの会員が同じアカウントでログイン出来ないようにする
   def active_for_authentication?
   super && (is_deleted == false)
-  end 
+  end
 
 end

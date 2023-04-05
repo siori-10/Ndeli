@@ -25,11 +25,16 @@ class Public::CustomersController < ApplicationController
 
   def withdraw
     @customer = current_customer
+    if @customer.email == 'guest@guest.com'
+      reset_session
+      redirect_to :root
+      else
     @customer.update(is_deleted:true)
     reset_session
     recipes = Recipe.where(customer_id: @customer.id)
     recipes.destroy_all
     redirect_to root_path
+  end 
   end
 
 
