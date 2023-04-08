@@ -29,9 +29,9 @@ with_options presence: true, on: :publicize do
     validates :dish_image
     validates :dish_name
     validates :recipe_description
-    #validates :material_name
+    validates :materials
     #validates :quantity
-    #validates :description
+    validates :recipe_descriptions
   end
   validates :dish_name, length: { maximum: 14 }, on: :publicize
   validates :recipe_description, length: { maximum: 80 }, on: :publicize

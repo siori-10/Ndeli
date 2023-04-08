@@ -1,6 +1,11 @@
-<div class="container mt-5">
+<div class="container mt-5 mb-5">
+
+  <div class="flash-notifications">
+  <% flash.each do |key, value| %>
+   <%= content_tag(:div, value, class: key) %>
+  <% end %>
 <div class="row">
-  <div class="col-3">
+  <div class="col-3 mt-5">
     <% @categories.each do |categoriy| %>
           <li class="list-group-item">
           <%= link_to categoriy.categoriy_name ,recipes_path(categoriy_id: categoriy.id) %>
@@ -15,14 +20,13 @@
 <h2>すべてのレシピ</h2>
 <% end %>
 
-<table class="table">
+<table class="table mt-2">
   <tbody>
 
   <% @recipes.each do |recipe| %>
   <tr>
     <td><%= link_to recipe_path(recipe.id) do %><%= image_tag recipe.get_image(200,200) %><% end %></td>
-    <td><strong><%= recipe.dish_name %></strong></td>
-    <td><%= recipe.recipe_description %></td>
+    <td class="align-middle"><strong><%= recipe.dish_name %></strong><br><%= recipe.recipe_description %></td>
   </tr>
     <% end %>
     <%= paginate @recipes %>

@@ -1,4 +1,9 @@
-<div class=container>
+  <div class="flash-notifications">
+  <% flash.each do |key, value| %>
+   <%= content_tag(:div, value, class: key) %>
+  <% end %>
+  
+<div class= "container mt-5 mb-5" >
 <p><storong>レシピを書く</storong></p>
 
 <%= form_with model: @recipe,url: recipes_path, method: :post do |f| %>

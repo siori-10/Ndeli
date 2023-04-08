@@ -3,6 +3,6 @@ class RecipeDescription < ApplicationRecord
 
   with_options presence: true do
 
-    validates :description
+  validates :description
   end
 end

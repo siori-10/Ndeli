@@ -12,13 +12,15 @@ class Public::RecipesController < ApplicationController
       if @recipe.save(context: :publicize)
       redirect_to recipe_path(@recipe), notice: "レシピを投稿しました！"
       else
-        render :new, alert: "登録できませんでした。お手数ですが、入力内容をご確認のうえ再度お試しください"
+        flash[:alert] = "登録できませんでした。お手数ですが、入力内容をご確認のうえ再度お試しください"
+        render :new
       end
     else
       if @recipe.update(is_draft: true)
         redirect_to recipes_draft_path(current_customer), notice: "レシピを下書き保存しました！"
       else
-        render :new, alert: "登録できませんでした。お手数ですが、入力内容をご確認のうえ再度お試しください"
+         flash[:alert] = "登録できませんでした。お手数ですが、入力内容をご確認のうえ再度お試しください"
+        render :new
       end
     end
   end
@@ -61,10 +63,11 @@ class Public::RecipesController < ApplicationController
            redirect_to recipe_path(@recipe.id), notice: "下書きのレシピを公開しました！"
         else
           @recipe.update(is_draft: false)
-          render :edit, alert: "レシピを公開できませんでした。お手数ですが、入力内容をご確認のうえ再度お試しください"
+          flash[:alert] = "レシピを公開できませんでした。お手数ですが、入力内容をご確認のうえ再度お試しください"
+          render :edit
         end
       else
-          #@recipe.is_draft = true
+          @recipe.is_draft = true
           render :edit, alert: "レシピを公開できませんでした。お手数ですが、入力内容をご確認のうえ再度お試しください"
       end
     elsif params[:update_post]
@@ -75,7 +78,8 @@ class Public::RecipesController < ApplicationController
           redirect_to recipe_path(@recipe.id), notice: "レシピを更新しました！"
         else
           @recipe.update(is_draft: false)
-          render :edit, alert: "レシピを公開できませんでした。お手数ですが、入力内容をご確認のうえ再度お試しください"
+          flash[:alert] = "レシピを公開できませんでした。お手数ですが、入力内容をご確認のうえ再度お試しください"
+          render :edit
         end
       end
 
