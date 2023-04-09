@@ -4,20 +4,21 @@
   <% flash.each do |key, value| %>
    <%= content_tag(:div, value, class: key) %>
   <% end %>
- <div class= "col mt-2 mb-4"><h4>下書き</h4></div>
+ <div class= "col mt-2 mb-4 "><h4>下書き</h4></div>
+
 
 <table>
   <% @recipes.each do |recipe| %>
   <tr>
-    <td><%= link_to recipe_path(recipe.id) do %><%= image_tag recipe.get_image(200,200) %><% end %></td>
-    <td><%= recipe.dish_name %></td>
-    <td><%= recipe.recipe_description %></td>
-    <td><%= link_to "レシピを編集する",edit_recipe_path(recipe.id), class:"btn btn-success"%></td>
-    <td><%= link_to "削除する",recipe_path(recipe.id), method: :delete, "data-confirm" => "本当に削除しますか？" ,class:"btn btn-danger" %></td>
+    <td><%= link_to recipe_path(recipe.id) do %><%= image_tag recipe.get_image(200,200), class:"mb-3" %><% end %></td>
+    <td><strong><%= recipe.dish_name %></strong><br><%= recipe.recipe_description %></td>
+    <td><%= link_to "レシピを編集する",edit_recipe_path(recipe.id), class:"btn btn-success ml-5"%></td>
+    <td><%= link_to "削除する",recipe_path(recipe.id), method: :delete, "data-confirm" => "本当に削除しますか？" ,class:"btn btn-danger ml-2" %></td>
   </tr>
 
   <% end %>
 </table>
+<%= link_to "back",my_recipes_recipes_path, class:'text-secondary' %>
 </div>
 </div>
 <%= paginate @recipes %>

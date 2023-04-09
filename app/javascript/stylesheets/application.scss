@@ -3,9 +3,15 @@
 @import '~bootstrap/scss/bootstrap';
 @import '~@fortawesome/fontawesome-free/scss/fontawesome';
 
-// .header {
-//   background-color:#FFFFCC
-// }
+
+.border-top {
+  border-top-color: #33FFCC !important;
+}
+
+.border-bottom {
+  border-bottom-color: #33FFCC !important;
+
+}
 
 body {
   font-family: 'Kiwi Maru', serif;
