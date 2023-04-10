@@ -7,18 +7,18 @@
  <div class= "col mt-2 mb-4 "><h4>下書き</h4></div>
 
 
-<table>
+<table class="table ml-5">
   <% @recipes.each do |recipe| %>
   <tr>
     <td><%= link_to recipe_path(recipe.id) do %><%= image_tag recipe.get_image(200,200), class:"mb-3" %><% end %></td>
-    <td><strong><%= recipe.dish_name %></strong><br><%= recipe.recipe_description %></td>
-    <td><%= link_to "レシピを編集する",edit_recipe_path(recipe.id), class:"btn btn-success ml-5"%></td>
-    <td><%= link_to "削除する",recipe_path(recipe.id), method: :delete, "data-confirm" => "本当に削除しますか？" ,class:"btn btn-danger ml-2" %></td>
+    <td class="align-middle"><strong><%= recipe.dish_name %></strong><br><%= recipe.recipe_description %></td>
+    <td class="align-middle"><%= link_to "レシピを編集する",edit_recipe_path(recipe.id), class:"btn btn-success ml-5"%></td>
+    <td class="align-middle"><%= link_to "削除する",recipe_path(recipe.id), method: :delete, "data-confirm" => "本当に削除しますか？" ,class:"btn btn-danger ml-2" %></td>
   </tr>
 
   <% end %>
 </table>
-<%= link_to "back",my_recipes_recipes_path, class:'text-secondary' %>
+<%= link_to "back",my_recipes_recipes_path, class:'text-secondary ml-4' %>
 </div>
 </div>
 <%= paginate @recipes %>

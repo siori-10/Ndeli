@@ -2,16 +2,16 @@
   <% flash.each do |key, value| %>
    <%= content_tag(:div, value, class: key) %>
   <% end %>
-  
+
 <div class= "container mt-5 mb-5" >
-<p><storong>レシピを書く</storong></p>
+<p class= "ml-3"><strong>レシピを書く</strong></p>
 
 <%= form_with model: @recipe,url: recipes_path, method: :post do |f| %>
   <%= render partial: 'form', locals: {f: f} %>
   <diV class="row mt-4 pb-5">
     <div class="form-inline mx-auto">
       <%= f.submit 'レシピを投稿', :name => 'post', class:"mr-5 btn btn-outline-warning" %>
-      <%= f.submit '下書きに保存', :name => 'draft', class:"mr-5 btn btn-outline-warning" %>
+      <%= f.submit '下書きに保存', :name => 'draft', class:"mr-5 btn btn-outline-secondary" %>
     </diV>
   </div>
 <% end %>
