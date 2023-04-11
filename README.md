@@ -19,6 +19,7 @@
 
 ## 設計書
 [ER図](https://drive.google.com/file/d/19q3-F_l6xIYUT-JTq3zKXdBt7oZnWqX8/view?usp=sharing)
+[詳細設計書](https://docs.google.com/spreadsheets/d/1IPARjxaziXrOM1BoUenMXLGbLsHATmmi/edit?usp=sharing&ouid=108547772764313704091&rtpof=true&sd=true)
 
 ## 開発環境
 - OS：Linux(CentOS)

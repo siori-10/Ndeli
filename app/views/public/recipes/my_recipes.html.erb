@@ -1,9 +1,9 @@
 <div class="container mt-5 mb-5">
   <div class="row">
-  <div class="col-10">
-<p><strong>投稿したレシピ</strong></p>
-</div>
-<%= link_to "下書き", recipes_draft_path, class:"btn btn-success" %>
+    <div class="col-10">
+      <p><strong>投稿したレシピ</strong></p>
+    </div>
+    <%= link_to "下書き", recipes_draft_path, class:"btn btn-success" %>
 
 <table class="table mt-3">
   <% @recipes.each do |recipe| %>
@@ -17,7 +17,7 @@
 
   <% end %>
 </table>
-<%= link_to "back", customers_my_page_path, class:'text-secondary ml-4' %>
-<%= paginate @recipes %>
 </div>
+<%= link_to "back", customers_my_page_path, class:'text-secondary ml-4' %><br>
+<%= paginate @recipes %>
 </div>

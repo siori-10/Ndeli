@@ -1,71 +1,75 @@
 <div class="container mt-5 mb-5">
-  <div class="flash-notifications">
+
     <% flash.each do |key, value| %>
-    <%= content_tag(:div, value, class: key) %>
-  <% end %>
-
-  <div class="row">
-
-    <div class="col-9">
-    <%= image_tag @customer.get_image_profile(100,100), class:"rounded-circle" %>
-    <strong><%= @customer.nickname %></strong>
-    <%= @customer.self_introduction %>
-    </div>
-
-    <div class="col-3 mt-4">
-      <% if customer_signed_in? && @recipe.customer.id != current_customer.id %>
-        <%= link_to "お気に入り", recipe_favorites_path(@recipe),method: :post　%>
-      <% end %>
-    </div>
-
-
-    <dev class="col-lg-6 mt-4 mb-3 ml-5">
-  <h2><%= @recipe.dish_name %></h2>
-    <%= image_tag @recipe.get_image(300,300), class:"rounded mr-5 mb-5 mt-3" %>
-
-    <%= @recipe.recipe_description %>
-
-  <h4>材料</h4>
-  <ul>
-    <% @recipe.materials.each do |material| %>
-      <li><%= "#{material.material_name} - #{material.quantity}" %></li>
+      <%= content_tag(:div, value, class: key) %>
     <% end %>
-  </ul>
 
-  <h4>手順</h4>
-  <% @recipe.recipe_descriptions.each do |recipe_description| %>
     <div class="row">
-      <div class="col-md-4">
-        <% if recipe_description.procedure_image.attached? %>
-          <%= image_tag recipe_description.procedure_image.variant(resize: "100x100^").processed, class: 'img-fluid' %>
-        <% else %>
-          <%= image_tag 'no_image.jpg', class: 'img-fluid' %>
+
+      <div class="col-9">
+        <%= image_tag @customer.get_image_profile(100,100), class:"rounded-circle" %>
+        <strong><%= @customer.nickname %></strong>
+        <%= @customer.self_introduction %>
+      </div>
+
+      <div class="col-3 mt-4">
+        <% if customer_signed_in? && @recipe.customer.id != current_customer.id %>
+        <%= link_to "お気に入り", recipe_favorites_path(@recipe),method: :post　%>
         <% end %>
       </div>
-      <div class="col-md-8">
-        <%= recipe_description.description %>
-      </div>
-    </div>
-  <% end %>
 
-<% if customer_signed_in? && @recipe.customer.id != current_customer.id %>
 
-  <h4>コメントを投稿する</h4>
-    <%= form_with model:@comment,url: recipe_comments_path(@recipe), method: :post, class: "row", html: {style: "justify-content: space-evenly;"} do |f| %>
-      <%= f.text_area :content, placeholder: '本文', class: "col-8", rows: 4 %>
-      <%= f.submit '投稿',class:"btn btn-primary col-2 align-self-end" %>
-    <% end %>
-<% end %>
-  <!--<div class="row">-->
-  <!--  <div class="col mt-5">-->
+      <div class="col-lg-8 mt-4 mb-3 ml-5">
+        <h2><%= @recipe.dish_name %></h2>
+        <div class="row">
+            <div class="col-md-7 ">
+              <%= image_tag @recipe.get_image(300,300), class:"rounded mr-5 mb-5 mt-3" %>
+            </div>
+            <div class="col-md-4 mt-3">
+              <%= @recipe.recipe_description %>
+            </div>
+        </div>
+
+        <h4>材料</h4>
+        <ul>
+          <% @recipe.materials.each do |material| %>
+          <li><%= "#{material.material_name} - #{material.quantity}" %></li>
+          <% end %>
+        </ul>
+
+        <h4>手順</h4>
+        <% @recipe.recipe_descriptions.each do |recipe_description| %>
+          <div class="row">
+            <div class="col-md-4">
+              <% if recipe_description.procedure_image.attached? %>
+                <%= image_tag recipe_description.procedure_image.variant(resize: "100x100^").processed, class: 'img-fluid' %>
+              <% else %>
+                <%= image_tag 'no_image.jpg', class: 'img-fluid' %>
+              <% end %>
+            </div>
+            <div class="col-md-8">
+              <p class="mt-5"><%= recipe_description.description %></p>
+            </div>
+          </div>
+        <% end %>
+
+        <% if customer_signed_in? && @recipe.customer.id != current_customer.id %>
+
+          <h4>コメントを投稿する</h4>
+            <%= form_with model:@comment,url: recipe_comments_path(@recipe), method: :post, class: "row", html: {style: "justify-content: space-evenly;"} do |f| %>
+              <%= f.text_area :content, placeholder: '本文', class: "col-8", rows: 4 %>
+              <%= f.submit '投稿',class:"btn btn-primary col-2 align-self-end" %>
+            <% end %>
+        <% end %>
+
       <table class="table text-center mt-5">
         <thead>
-      <tr>
-        <th>
-          <p>コメント一覧</p>
-        </th>
-      </tr>
-    </thead>
+          <tr>
+            <th>
+              <p>コメント一覧</p>
+            </th>
+          </tr>
+        </thead>
         <tbody>
           <% @recipe.comments.each do |comment| %>
           <tr>
@@ -77,5 +81,6 @@
           <% end %>
         </tbody>
       </table>
-</div>
+      </div>
+  </div>
 </div>
