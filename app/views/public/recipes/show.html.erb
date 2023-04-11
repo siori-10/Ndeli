@@ -1,33 +1,37 @@
 <div class="container mt-5 mb-5">
-  
-   <div class="flash-notifications">
-  <% flash.each do |key, value| %>
-   <%= content_tag(:div, value, class: key) %>
+  <div class="flash-notifications">
+    <% flash.each do |key, value| %>
+    <%= content_tag(:div, value, class: key) %>
   <% end %>
-  
+
   <div class="row">
-  
-    <div class="col-3">
+
+    <div class="col-9">
+    <%= image_tag @customer.get_image_profile(100,100), class:"rounded-circle" %>
+    <strong><%= @customer.nickname %></strong>
+    <%= @customer.self_introduction %>
+    </div>
+
+    <div class="col-3 mt-4">
       <% if customer_signed_in? && @recipe.customer.id != current_customer.id %>
         <%= link_to "お気に入り", recipe_favorites_path(@recipe),method: :post　%>
       <% end %>
     </div>
-    <%= image_tag @customer.get_image_profile(100,100) %>
-    <%= @customer.nickname %>
-    <%= @customer.self_introduction %>
 
-    
-    <dev class="col-lg-6">
+
+    <dev class="col-lg-6 mt-4 mb-3 ml-5">
   <h2><%= @recipe.dish_name %></h2>
-    <%= image_tag @recipe.get_image(200,200) %>
-    
+    <%= image_tag @recipe.get_image(300,300), class:"rounded mr-5 mb-5 mt-3" %>
+
+    <%= @recipe.recipe_description %>
+
   <h4>材料</h4>
   <ul>
     <% @recipe.materials.each do |material| %>
       <li><%= "#{material.material_name} - #{material.quantity}" %></li>
     <% end %>
   </ul>
-  
+
   <h4>手順</h4>
   <% @recipe.recipe_descriptions.each do |recipe_description| %>
     <div class="row">
@@ -43,18 +47,18 @@
       </div>
     </div>
   <% end %>
-  
+
 <% if customer_signed_in? && @recipe.customer.id != current_customer.id %>
 
   <h4>コメントを投稿する</h4>
-    <%= form_with model:@comment,url: recipe_comments_path(@recipe), method: :post do |f| %>
-      <%= f.text_area :content, placeholder: '本文' %>
-      <%= f.submit '投稿',class:"btn btn-primary" %>
+    <%= form_with model:@comment,url: recipe_comments_path(@recipe), method: :post, class: "row", html: {style: "justify-content: space-evenly;"} do |f| %>
+      <%= f.text_area :content, placeholder: '本文', class: "col-8", rows: 4 %>
+      <%= f.submit '投稿',class:"btn btn-primary col-2 align-self-end" %>
     <% end %>
 <% end %>
-  <div class="row mt-4">
-    <div class="col-6">
-      <table class="table">
+  <!--<div class="row">-->
+  <!--  <div class="col mt-5">-->
+      <table class="table text-center mt-5">
         <thead>
       <tr>
         <th>
@@ -65,8 +69,10 @@
         <tbody>
           <% @recipe.comments.each do |comment| %>
           <tr>
-          <td><%= comment.customer.nickname %></td>
-          <td><%= comment.content %></td>
+            <td>
+              <p><%= comment.customer.nickname %></p>
+              <p style="font-size: 1.5rem;"><%= comment.content %></p>
+            </td>
           </tr>
           <% end %>
         </tbody>

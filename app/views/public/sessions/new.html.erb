@@ -2,7 +2,7 @@
   <div class ="row">
 
 
-<div class="rounded border border-secondary col-lg-4 offset-lg-4">
+<div class="rounded border border-secondary col-lg-4 offset-lg-4 ">
   <p><strong>会員ログイン</strong></p>
 <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
   <div class="field">
@@ -24,7 +24,7 @@
 
   <!--<div class="d-grid gap-2 d-md-block">-->
 
-  <%= link_to 'ゲストログイン',  customers_guest_saign_in_path, method: :post, class: "btn btn-outline-warning col-lg-12" %>
+  <%= link_to 'ゲストログイン',  customers_guest_saign_in_path, method: :post, class: "btn btn-outline-warning col-lg-12 mb-3" %>
 
   <div class="actions">
     <%= f.submit "ログイン", class: "btn btn-outline-success col-lg-12" %>

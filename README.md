@@ -18,7 +18,7 @@
 - 自身のレシピを掲載する時
 
 ## 設計書
-<...>
+[ER図](https://drive.google.com/file/d/19q3-F_l6xIYUT-JTq3zKXdBt7oZnWqX8/view?usp=sharing)
 
 ## 開発環境
 - OS：Linux(CentOS)
@@ -28,4 +28,5 @@
 - IDE：Cloud9
 
 ## 使用素材
-- 使用検討中
+- designevo
+- O-DAN

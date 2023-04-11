@@ -1,17 +1,16 @@
-<div class="container mt-5">
+<div class="container mt-5 mb-5">
   <div class="row">
-    <div class="col-3">
-      </div>
-    <%= image_tag @customer.get_image_profile(100,100) %>
+    <div class="col-9 ">
+    <%= image_tag @customer.get_image_profile(100,100), class:"rounded-circle" %>
     <%= @customer.nickname %>
     <%= @customer.self_introduction %>
+    </div>
 
 
-    <dev class="col-lg-6">
+    <div class="col-lg-6 mt-5">
   <h2><%= @recipe.dish_name %></h2>
-  <p></p>
-    <%= image_tag @recipe.get_image(200,200) %>
-
+    <%= image_tag @recipe.get_image(200,200), class:"rounded mr-5 mb-5 mt-3" %>
+    <%= @recipe.recipe_description %>
   <h4>材料</h4>
   <ul>
     <% @recipe.materials.each do |material| %>
@@ -38,7 +37,7 @@
 
   <div class="row mt-3">
     <div class="col-12">
-      <table class="table">
+      <table class="table text-center mt-5">
         <thead>
       <tr>
         <th>
@@ -49,9 +48,9 @@
         <tbody>
           <% @recipe.comments.each do |comment| %>
           <tr>
-          <td><%= comment.customer.nickname %></td>
           <td><%= comment.content %></td>
-          <td><%= link_to "削除する", admin_comment_path(comment.id), method: :delete, "data-confirm" => "本当に削除しますか？" ,class:"btn btn-danger" %></td>
+          <td><%= comment.customer.nickname %></td>
+          <td><%= link_to "削除する", admin_comment_path(comment.id), method: :delete, "data-confirm" => "本当に削除しますか？" ,class:"btn btn-outline-danger" %></td>
           </tr>
           <% end %>
         </tbody>

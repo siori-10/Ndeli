@@ -1,13 +1,18 @@
+<div class="container mt-5 mb-5">
+  <div class="row">
 
-<p><strong>お気に入りのレシピ</strong></p>
-
-<table>
+<div class= "col mt-2 mb-4 ml-5"><h4>お気に入りのレシピ</h4></div>
+<table class="table ml-5">
   <% @favorite_recipes.each do |recipe| %>
   <tr>
-    <td><%= link_to recipe_path(recipe.id) do %><%= image_tag recipe.get_image(200,200) %><% end %></td>
-    <td><%= recipe.dish_name %></td>
-    <td><%= recipe.recipe_description %></td>
-    <td><%= link_to "お気に入り解除",recipe_favorites_path(recipe.id), method: :delete, "data-confirm" => "お気に入り解除しますか？" ,class:"btn btn-danger" %></td>
+    <td><%= link_to recipe_path(recipe.id) do %><%= image_tag recipe.get_image(200,200), class:"rounded" %><% end %></td>
+    <td class="align-middle"><strong><%= recipe.dish_name %></strong></td>
+    <td class="align-middle"><%= recipe.recipe_description %></td>
+    <td class="align-middle"><%= link_to "お気に入り解除",recipe_favorites_path(recipe.id), method: :delete, "data-confirm" => "お気に入り解除しますか？" ,class:"btn btn-danger" %></td>
   </tr>
   <% end %>
 </table>
+<%= link_to "back",customers_my_page_path, class:'text-secondary ml-4' %>
+</div>
+</div>
+<%= paginate @favorite_recipes %>

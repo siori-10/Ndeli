@@ -103,7 +103,7 @@ class Public::RecipesController < ApplicationController
   end
 
   def my_recipes
-    @recipes = current_customer.recipes.where(is_draft: false).page(params[:page])
+    @recipes = current_customer.recipes.where(is_draft: false).page(params[:page]).per(5)
   end
 
   private
