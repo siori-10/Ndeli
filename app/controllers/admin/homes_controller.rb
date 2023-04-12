@@ -7,13 +7,13 @@ class Admin::HomesController < ApplicationController
       @recipes = @search.result.page(params[:page])
     else
       if params[:categoriy_id] == nil
-        @recipes = Recipe.all.page(params[:page])
+        @recipes = Recipe.where(is_draft:false).page(params[:page])
       else
         @recipes = Recipe.where(categoriy_id:params[:categoriy_id]).page(params[:page])
       end
     end
   end
-  
+
   private
   def recipe_params
     params.require(:recipe).permit(:dish_name, :recipe_description, :number_people, :dish_image, :categoriy_id, :customer_id,
