@@ -17,6 +17,9 @@
         </div>
       </div>
       <h4>材料</h4>
+      <div class="ml-3">
+          <strong><%= @recipe.number_people %></strong>
+        </div>
       <ul>
         <% @recipe.materials.each do |material| %>
           <li><%= "#{material.material_name} - #{material.quantity}" %></li>

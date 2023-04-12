@@ -1,41 +1,40 @@
 <div class="container mt-5 mb-5">
-<p><%= @customer.nickname %>さんの会員情報編集</p>
+  <p><%= @customer.nickname %>さんの会員情報編集</p>
+  <p>会員ID    <%= @customer.id %></p>
 
-<p>会員ID    <%= @customer.id %></p>
+   <%= form_with model: @customer ,url: admin_customer_path(@customer.id), method: :patch do |f| %>
 
-<%= form_with model: @customer ,url: admin_customer_path(@customer.id), method: :patch do |f| %>
+  <div class="form-group">
+    <label for="profile_image"></label>
+      <%= f.file_field :profile_image, accept: "image/*" %>
+  </div>
 
-<div class="form-group">
-  <label for="profile_image"></label>
-  <%= f.file_field :profile_image, accept: "image/*" %>
-</div>
+  <div class="form-group ">
+    <label for="customer_nicname">ニックネーム</label>
+    <%= f.text_field :nickname %>
+  </div>
 
-<div class="form-group ">
-  <label for="customer_nicname">ニックネーム</label>
-  <%= f.text_field :nickname %>
-</div>
+  <div class="form-group">
+    <label for="customer_email">メールアドレス</label>
+    <%= f.text_field :email %>
+  </div>
 
-<div class="form-group">
-  <label for="customer_email">メールアドレス</label>
-  <%= f.text_field :email %>
-</div>
+  <div class="form-group ">
+    <label for="customer_self_introduction">自己紹介文</label>
+    <%= f.text_area :self_introduction %>
+  </div>
 
-<div class="form-group ">
-  <label for="customer_self_introduction">自己紹介文</label>
-  <%= f.text_area :self_introduction %>
-</div>
-
-<div class="form-group">
-<p>会員ステータス</p>
-<%= f.radio_button :is_deleted,"false" %>
-<%= f.label :is_deleted,"有効" %>
-<%= f.radio_button :is_deleted,"true" %>
-<%= f.label :is_deleted,"退会" %>
-</div>
+  <div class="form-group">
+  <p>会員ステータス</p>
+  <%= f.radio_button :is_deleted,"false" %>
+  <%= f.label :is_deleted,"有効" %>
+  <%= f.radio_button :is_deleted,"true" %>
+  <%= f.label :is_deleted,"退会" %>
+  </div>
 
 
-<div class="form-group">
-  <%= f.submit '変更を保存',class:"btn btn-outline-success"%>
-</div>
-<% end %>
+  <div class="form-group">
+    <%= f.submit '変更を保存',class:"btn btn-outline-success"%>
+  </div>
+  <% end %>
 </div>

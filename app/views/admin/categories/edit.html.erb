@@ -1,8 +1,12 @@
-<p><strong>カテゴリー編集</strong></p>
+<div class="container mt-5 mb-5">
+  <div class="row">
+    <p><strong>カテゴリー編集</strong></p>
+  </div>
+  <%= form_with model: @categoriy,url: admin_category_path(@categoriy.id), method: :patch do |f| %>
 
-<%= form_with model: @categoriy,url: admin_category_path(@categoriy.id), method: :patch do |f| %>
+    <p>カテゴリー名</p>
+    <%= f.text_field :categoriy_name %>
+    <%= f.submit '変更', class:"btn btn-outline-primary" %>
+    <% end %>
 
-<p>カテゴリー名</p>
-<%= f.text_field :categoriy_name %>
-<%= f.submit '変更', class:"btn btn-outline-primary" %>
-<% end %>
+</div>

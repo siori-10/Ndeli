@@ -1,21 +1,20 @@
 <div class="container mt-5 mb-5">
+  <p>レシピのタイトル</p>
+  <%= f.text_field :dish_name %>
+  <P>料理の写真を載せる</P>
+  <%= f.file_field :dish_image,  accept: "image/*" %>
 
-<p>レシピのタイトル</p>
-<%= f.text_field :dish_name %>
-<P>料理の写真を載せる</P>
-<%= f.file_field :dish_image,  accept: "image/*" %>
+  <P>レシピ紹介文</P>
+  <%= f.text_area :recipe_description %>
 
-<P>レシピ紹介文</P>
-<%= f.text_area :recipe_description %>
+  <P><storong>料理の材料</storong></P>
 
-<P><storong>料理の材料</storong></P>
+  <%= f.text_field :number_people %>何人分（例 ２人分）
 
-<%= f.text_field :number_people %>何人分（例 ２人分）
-
-<%= f.fields_for :materials do |m| %>
-  <%= render "public/recipes/material_fields", f: m %>
-<% end %>
-<div id="materials-fields"></div>
+  <%= f.fields_for :materials do |m| %>
+    <%= render "public/recipes/material_fields", f: m %>
+  <% end %>
+  <div id="materials-fields"></div>
 
 <div class="form-group">
   <div class="col-10 mx-auto mt-2">
@@ -30,7 +29,7 @@
 
 <%= f.fields_for :recipe_descriptions do |rd| %>
   <%= render "public/recipes/recipe_description_fields", f: rd %>
-<% end %>
+  <% end %>
 <div id="recipe_description"></div>
 
 <div class="form-group">
@@ -49,6 +48,6 @@
         <%= f.collection_select :categoriy_id, Categoriy.all, :id, :categoriy_name %>
     </div>
   </div>
-    
-  
+
+
 </div>

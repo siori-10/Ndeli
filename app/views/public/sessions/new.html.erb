@@ -1,39 +1,36 @@
 <div class="container mt-5 mb-5">
   <div class ="row">
+    <div class="rounded border border-secondary col-lg-4 offset-lg-4 ">
+      <p><strong>会員ログイン</strong></p>
+      <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+      <div class="field">
+        <%= f.label :メールアドレス %><br />
+        <%= f.email_field :email, autofocus: true, autocomplete: "email", class:"col-lg-12" %>
+      </div>
 
+      <div class="field">
+        <%= f.label :パスワード（6文字以上） %><br />
+        <%= f.password_field :password, autocomplete: "current-password", class:"col-lg-12" %>
+      </div>
 
-<div class="rounded border border-secondary col-lg-4 offset-lg-4 ">
-  <p><strong>会員ログイン</strong></p>
-<%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
-  <div class="field">
-    <%= f.label :メールアドレス %><br />
-    <%= f.email_field :email, autofocus: true, autocomplete: "email", class:"col-lg-12" %>
-  </div>
-
-  <div class="field">
-    <%= f.label :パスワード（6文字以上） %><br />
-    <%= f.password_field :password, autocomplete: "current-password", class:"col-lg-12" %>
-  </div>
-
-  <% if devise_mapping.rememberable? %>
-    <div class="field">
-      <%= f.check_box :remember_me %>
-      <%= f.label :remember_me %>
-    </div>
-  <% end %>
+      <% if devise_mapping.rememberable? %>
+        <div class="field">
+          <%= f.check_box :remember_me %>
+          <%= f.label :remember_me %>
+        </div>
+      <% end %>
 
   <!--<div class="d-grid gap-2 d-md-block">-->
 
-  <%= link_to 'ゲストログイン',  customers_guest_saign_in_path, method: :post, class: "btn btn-outline-warning col-lg-12 mb-3" %>
+      <%= link_to 'ゲストログイン',  customers_guest_saign_in_path, method: :post, class: "btn btn-outline-warning col-lg-12 mb-3" %>
 
-  <div class="actions">
-    <%= f.submit "ログイン", class: "btn btn-outline-success col-lg-12" %>
+      <div class="actions">
+        <%= f.submit "ログイン", class: "btn btn-outline-success col-lg-12" %>
+      </div>
+      <% end %>
+
+      新規会員登録は<%= render "public/shared/links" %>
+      </div>
+    </div>
   </div>
-
-<% end %>
-
-新規会員登録は<%= render "public/shared/links" %>
-</div>
-</div>
-</div>
 </div>
